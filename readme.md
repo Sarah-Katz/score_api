@@ -2,6 +2,53 @@
 
 **This documentation provides details on how to use the Score API, which manages teams, players, games, and scores.**
 
+## Installation
+
+To install and run this project locally, follow these steps:
+
+1. **Clone the Repository:**
+
+    ```bash
+    git clone <repository-url>
+    cd score_api
+    ```
+
+2. **Install Dependencies:**
+  
+    Use Composer to install the necessary PHP dependencies.
+
+    ```bash
+    composer install
+    ```
+
+3. **Run Database Migrations:**
+
+    Execute the database migrations to set up the database schema.
+
+    ```bash
+    php bin/console doctrine:migrations:migrate
+    ```
+
+4. **Start The Docker Containers**
+
+    Use Docker Compose to start the application and its dependencies.
+
+    ```bash
+    docker-compose up -d
+    ```
+
+5. **Start The Symfony Server**
+
+    Start Symfony's local server to be able to reach the API.
+
+    ```bash
+    symfony serve -d
+    ```
+
+6. **Access the Application:**
+
+    Once the containers are up and running and you started the Symfony local server, you can access the application at <http://localhost:8000> using the endpoints found in this documentation.
+
 ## Endpoints
 
 ### Teams
@@ -21,11 +68,11 @@
 - **Response:** The created team object.
 - **Request Body:**
 
-```json
-{
-  "name": "Team Name"
-}
-```
+  ```json
+  {
+    "name": "Team Name"
+  }
+  ```
 
 #### Get a Specific Team
 
@@ -97,13 +144,13 @@
 - **Response:** The created score object.
 - **Request Body:**
 
-```json
-{
-  "value": 10,
-  "game": 1,
-  "team": 1
-}
-```
+    ```json
+    {
+      "value": 10,
+      "game": 1,
+      "team": 1
+    }
+    ```
 
 #### Get a Specific Score
 
@@ -124,13 +171,13 @@
 - **Response:** The updated score object.
 - **Request Body:**
 
-```json
-{
-  "value": 15,
-  "game": 1,
-  "team": 1
-}
-```
+    ```json
+    {
+      "value": 15,
+      "game": 1,
+      "team": 1
+    }
+    ```
 
 #### Delete a Score
 
@@ -158,12 +205,12 @@
 - **Response:** The created player object.
 - **Request Body:**
 
-```json
-{
-  "name": "Player Name",
-  "team": 1
-}
-```
+    ```json
+    {
+      "name": "Player Name",
+      "team": 1
+    }
+    ```
 
 #### Get a Specific Player
 
@@ -184,12 +231,12 @@
 - **Response:** The updated player object.
 - **Request Body:**
 
-```json
-{
-  "name": "Updated Player Name",
-  "team": 2
-}
-```
+    ```json
+    {
+      "name": "Updated Player Name",
+      "team": 2
+    }
+    ```
 
 #### Delete a Player
 
@@ -204,75 +251,75 @@
 
 ### Team Object
 
-```json
-{
-  "id": 1,
-  "name": "Team Name",
-  "players": [
+    ```json
     {
       "id": 1,
-      "name": "Player Name"
+      "name": "Team Name",
+      "players": [
+        {
+          "id": 1,
+          "name": "Player Name"
+        }
+      ],
+      "scores": [
+        {
+          "id": 1,
+          "value": 10,
+          "game": 2
+        }
+      ]
     }
-  ],
-  "scores": [
-    {
-      "id": 1,
-      "value": 10,
-      "game": 2
-    }
-  ]
-}
-```
+    ```
 
 ### Games Object
 
-```json
-{
-  "id": 2,
-    "scores": [
-      {
-        "value": 3,
-        "team": 
+    ```json
+    {
+      "id": 2,
+        "scores": [
           {
-            "id": 3,    
-            "name": "The big Johns"
+            "value": 3,
+            "team": 
+              {
+                "id": 3,    
+                "name": "The big Johns"
+              }
           }
-      }
-    ]
-}
-```
+        ]
+    }
+    ```
 
 ### Scores Object
 
-```json
-{
-  "id": 1,
-  "value": 3,
-  "game":
+    ```json
     {
-       "id": 2
-    },
-  "team":
-    {
-      "id": 3,
-      "name": "The big Johns"
+      "id": 1,
+      "value": 3,
+      "game":
+        {
+           "id": 2
+        },
+      "team":
+        {
+          "id": 3,
+          "name": "The big Johns"
+        }
     }
-}
-```
+    ```
 
 ### Players Object
 
-```json
-{
-  "id": 3,
-  "name": "Johnny",
-  "team":
+    ```json
     {
       "id": 3,
-      "name": "The big Johns"
+      "name": "Johnny",
+      "team":
+        {
+          "id": 3,
+          "name": "The big Johns"
+        }
     }
-}
-```
+    ```
 
 ## Error Handling
 
